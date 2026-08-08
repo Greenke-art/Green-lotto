@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Green Lotto — Apply for your travel draw entry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="corkboard">
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark">GL</span>
+      <span class="brand-name">Green&nbsp;Lotto</span>
+    </div>
+    <span class="eyebrow">Entry draw · Departure: TBA</span>
+  </header>
+
+  <main class="stage">
+
+    <!-- STEP 1: Intro / Hero -->
+    <section id="view-intro" class="view active">
+      <div class="hero">
+        <p class="hero-kicker">Application №<span id="serial-preview">000000</span></p>
+        <h1 class="hero-title">One ticket.<br>One draw.<br>One trip.</h1>
+        <p class="hero-sub">Fill in your details, pay the KES 2,000 entry fee by M-Pesa, and you're in the draw for a fully-paid travel package to the United States.</p>
+        <ul class="hero-facts">
+          <li><span>Entry fee</span><strong>KES 2,000</strong></li>
+          <li><span>Payment</span><strong>M-Pesa STK push</strong></li>
+          <li><span>Eligibility</span><strong>18+, Kenyan resident</strong></li>
+        </ul>
+        <button class="btn btn-primary" id="btn-start">Start application →</button>
+        <p class="fine-print">This is a private promotional draw, not a government visa program. See full terms before entering.</p>
+      </div>
+    </section>
+
+    <!-- STEP 2: Form -->
+    <section id="view-form" class="view">
+      <div class="ticket-frame">
+        <div class="ticket-strip"></div>
+        <form id="application-form" novalidate>
+          <h2 class="form-title">Applicant details</h2>
+
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input type="text" id="fullName" name="fullName" autocomplete="name" required />
+            <span class="field-error" data-error="fullName"></span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+              <span class="field-error" data-error="email"></span>
+            </div>
+            <div class="field">
+              <label for="phone">M-Pesa phone number</label>
+              <input type="tel" id="phone" name="phone" placeholder="07XX XXX XXX" autocomplete="tel" required />
+              <span class="field-error" data-error="phone"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="nationalId">National ID number</label>
+              <input type="text" id="nationalId" name="nationalId" required />
+              <span class="field-error" data-error="nationalId"></span>
+            </div>
+            <div class="field">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="18" max="100" required />
+              <span class="field-error" data-error="age"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="employmentStatus">Employment status</label>
+            <select id="employmentStatus" name="employmentStatus" required>
+              <option value="">Select one</option>
+              <option value="employed">Employed</option>
+              <option value="self_employed">Self-employed / Business owner</option>
+              <option value="student">Student</option>
+              <option value="unemployed">Unemployed</option>
+              <option value="other">Other</option>
+            </select>
+            <span class="field-error" data-error="employmentStatus"></span>
+          </div>
+
+          <div class="field">
+            <label for="address">Physical address</label>
+            <textarea id="address" name="address" rows="2" required></textarea>
+            <span class="field-error" data-error="address"></span>
+          </div>
+
+          <label class="checkbox-row">
+            <input type="checkbox" id="agree" required />
+            <span>I confirm my details are accurate and I accept the entry terms.</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-block" id="btn-continue-payment">
+            Continue to payment →
+          </button>
+          <p class="form-status" id="form-error"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- STEP 3: Payment -->
+    <section id="view-payment" class="view">
+      <div class="ticket-frame">
+        <div class="ticket-strip"></div>
+        <h2 class="form-title">Pay your entry fee</h2>
+        <div class="amount-block">
+          <span class="amount-label">Amount due</span>
+          <span class="amount-value">KES 2,000</span>
+        </div>
+        <p class="payment-copy">
+          We'll send an M-Pesa prompt straight to your phone. Enter your M-Pesa
+          PIN <strong>on your own phone</strong> — never here on this site.
+        </p>
+        <button class="btn btn-primary btn-block" id="btn-pay">Send M-Pesa prompt</button>
+        <p class="form-status" id="payment-error"></p>
+      </div>
+    </section>
+
+    <!-- STEP 4: Waiting for PIN -->
+    <section id="view-waiting" class="view">
+      <div class="ticket-frame waiting-frame">
+        <div class="pulse-ring"></div>
+        <h2 class="form-title">Check your phone</h2>
+        <p class="payment-copy">
+          An M-Pesa prompt has been sent to <strong id="waiting-phone">your phone</strong>.
+          Enter your PIN on the prompt to confirm your KES 2,000 payment.
+        </p>
+        <p class="waiting-note" id="waiting-note">Waiting for confirmation…</p>
+      </div>
+    </section>
+
+    <!-- STEP 5: Success / Boarding pass -->
+    <section id="view-success" class="view">
+      <div class="boarding-pass">
+        <div class="bp-main">
+          <p class="bp-eyebrow">Green Lotto · Entry confirmed</p>
+          <h2 class="bp-name" id="bp-name">—</h2>
+          <div class="bp-grid">
+            <div><span>Ticket No.</span><strong id="bp-ticket">—</strong></div>
+            <div><span>M-Pesa receipt</span><strong id="bp-receipt">—</strong></div>
+            <div><span>Amount paid</span><strong>KES 2,000</strong></div>
+            <div><span>Draw</span><strong>Trip to the USA</strong></div>
+          </div>
+        </div>
+        <div class="bp-stub">
+          <span class="stub-label">ENTRY</span>
+          <span class="stub-ticket" id="bp-ticket-stub">—</span>
+          <span class="stub-code">GREEN·LOTTO</span>
+        </div>
+      </div>
+      <p class="success-note">Save a screenshot of this ticket. We'll contact you by email and phone if you're drawn.</p>
+    </section>
+
+    <!-- STEP 6: Failure -->
+    <section id="view-failed" class="view">
+      <div class="ticket-frame">
+        <h2 class="form-title">Payment didn't go through</h2>
+        <p class="payment-copy" id="failed-reason">The M-Pesa request wasn't completed.</p>
+        <button class="btn btn-primary btn-block" id="btn-retry">Try payment again</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

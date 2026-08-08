@@ -1,0 +1,364 @@
+/* ---- Tokens ---- */
+:root {
+  --ink: #16213a;
+  --night: #1b2a4a;
+  --paper: #f7f3e8;
+  --paper-dim: #efe8d6;
+  --brass: #c9a227;
+  --stamp-red: #b33a3a;
+  --teal: #2f6f6b;
+  --line: rgba(22, 33, 58, 0.14);
+
+  --display: "Fraunces", serif;
+  --body: "Inter", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--night);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(201,162,39,0.08), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(47,111,107,0.12), transparent 45%);
+  color: var(--ink);
+  font-family: var(--body);
+  min-height: 100vh;
+}
+
+.corkboard {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+/* ---- Header ---- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 4px 28px;
+  color: var(--paper);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 34px; height: 34px;
+  border: 1.5px solid var(--brass);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-weight: 600; font-size: 13px;
+  color: var(--brass);
+}
+.brand-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(247,243,232,0.55);
+}
+
+/* ---- View switching ---- */
+.view { display: none; }
+.view.active { display: block; animation: rise 0.45s ease both; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Hero ---- */
+.hero {
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 36px 28px 30px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--teal);
+  margin: 0 0 14px;
+}
+.hero-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 1.02;
+  margin: 0 0 18px;
+  color: var(--ink);
+}
+.hero-sub {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: rgba(22,33,58,0.75);
+  margin: 0 0 22px;
+  max-width: 46ch;
+}
+.hero-facts {
+  list-style: none;
+  padding: 16px 0;
+  margin: 0 0 24px;
+  border-top: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+}
+.hero-facts li {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  font-size: 14px;
+}
+.hero-facts span { color: rgba(22,33,58,0.6); }
+.hero-facts strong { font-family: var(--mono); font-weight: 600; }
+
+.fine-print {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: rgba(22,33,58,0.5);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 22px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-primary {
+  background: var(--stamp-red);
+  color: var(--paper);
+  box-shadow: 0 8px 20px rgba(179,58,58,0.35);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 26px rgba(179,58,58,0.4); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.btn-block { width: 100%; }
+
+/* ---- Ticket frame (form / payment) ---- */
+.ticket-frame {
+  position: relative;
+  background: var(--paper);
+  border-radius: 18px;
+  padding: 32px 28px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.ticket-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg, var(--stamp-red) 0 14px, var(--brass) 14px 28px
+  );
+}
+.form-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 24px;
+  margin: 8px 0 24px;
+}
+
+.field { margin-bottom: 16px; }
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: rgba(22,33,58,0.65);
+  margin-bottom: 6px;
+}
+input, select, textarea {
+  width: 100%;
+  font-family: var(--body);
+  font-size: 15px;
+  padding: 11px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--teal);
+  outline-offset: 1px;
+  border-color: var(--teal);
+}
+textarea { resize: vertical; }
+
+.field-error {
+  display: block;
+  font-size: 12px;
+  color: var(--stamp-red);
+  margin-top: 5px;
+  min-height: 14px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(22,33,58,0.75);
+  margin: 6px 0 22px;
+}
+.checkbox-row input { width: auto; margin-top: 2px; }
+
+.form-status {
+  min-height: 18px;
+  font-size: 13px;
+  color: var(--stamp-red);
+  margin: 12px 0 0;
+  text-align: center;
+}
+
+/* ---- Payment view ---- */
+.amount-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  background: var(--paper-dim);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+.amount-label { font-size: 13px; color: rgba(22,33,58,0.6); }
+.amount-value { font-family: var(--mono); font-weight: 600; font-size: 22px; color: var(--teal); }
+.payment-copy {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: rgba(22,33,58,0.75);
+  margin: 0 0 22px;
+}
+
+/* ---- Waiting view ---- */
+.waiting-frame {
+  text-align: center;
+  padding-top: 44px;
+  padding-bottom: 40px;
+}
+.pulse-ring {
+  width: 64px; height: 64px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  border: 3px solid var(--teal);
+  position: relative;
+}
+.pulse-ring::after {
+  content: "";
+  position: absolute; inset: -3px;
+  border-radius: 50%;
+  border: 3px solid var(--teal);
+  animation: pulse 1.6s ease-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+.waiting-note {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--teal);
+}
+
+/* ---- Boarding pass (success) ---- */
+.boarding-pass {
+  display: flex;
+  background: var(--paper);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+}
+.bp-main {
+  flex: 1;
+  padding: 30px 26px;
+  position: relative;
+}
+.bp-main::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 1px;
+  background-image: linear-gradient(var(--ink) 50%, transparent 0%);
+  background-size: 2px 12px;
+  opacity: 0.15;
+}
+.bp-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 10px;
+}
+.bp-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0 0 22px;
+}
+.bp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 12px;
+}
+.bp-grid span { display: block; font-size: 11px; color: rgba(22,33,58,0.5); margin-bottom: 4px; }
+.bp-grid strong { font-family: var(--mono); font-size: 14px; }
+
+.bp-stub {
+  width: 96px;
+  background: var(--night);
+  color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 8px;
+}
+.stub-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--brass);
+}
+.stub-ticket {
+  writing-mode: vertical-rl;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+}
+.stub-code {
+  writing-mode: vertical-rl;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: rgba(247,243,232,0.5);
+}
+
+.success-note {
+  text-align: center;
+  color: rgba(247,243,232,0.65);
+  font-size: 13px;
+  margin-top: 18px;
+}
+
+@media (max-width: 420px) {
+  .field-row { grid-template-columns: 1fr; }
+  .hero-title { font-size: 36px; }
+}
